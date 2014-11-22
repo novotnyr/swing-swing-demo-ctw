@@ -16,14 +16,13 @@
 			<artifactId>spring-aspects</artifactId>
 			<version>4.1.2.RELEASE</version>
 		</dependency>
-
 		<!-- http://stackoverflow.com/a/9637279 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-tx</artifactId>
 			<version>4.1.2.RELEASE</version>
 		</dependency>
-
+	
 		<!-- required for Aspect weaving, http://bit.ly/1HvRC0X -->
 		<dependency>
 			<groupId>org.hibernate.javax.persistence</groupId>
@@ -36,38 +35,16 @@
 			<groupId>javax.cache</groupId>
 			<artifactId>cache-api</artifactId>
 			<version>1.0.0</version>
-		</dependency>
-
-		<!-- required for Spring Agent -->
-		
-		<!-- 
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-instrument</artifactId>
-			<version>4.1.2.RELEASE</version>
-			<scope>runtime</scope>
-		</dependency>
-		 -->
-
-
-		<dependency>
-			<groupId>com.jgoodies</groupId>
-			<artifactId>jgoodies-looks</artifactId>
-			<version>2.5.3</version>
-		</dependency>
-
-
+		</dependency>	
 	</dependencies>
 	<build>
 		<plugins>
-			<!-- 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>aspectj-maven-plugin</artifactId>
 				<version>1.7</version>
 				<configuration>
 					<complianceLevel>1.6</complianceLevel>
-					<showWeaveInfo>true</showWeaveInfo>
 					<aspectLibraries>
 						<aspectLibrary>
 							<groupId>org.springframework</groupId>
@@ -84,22 +61,22 @@
 					</execution>
 				</executions>
 			</plugin>
-			 -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.2.1</version>
 				<executions>
 					<execution>
+						<id>default-cli</id>
+						<!-- compile-time-weaving -->
 						<goals>
-							<goal>exec</goal>
+							<goal>java</goal>
 						</goals>
+						<configuration>
+							<mainClass>sk.upjs.ics.novotnyr.restlet.MainFrameRunner</mainClass>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<executable>java</executable>
-					<commandlineArgs>-cp %classpath -javaagent:c:\Users\rn\.m2\repository\org\springframework\spring-instrument\4.1.2.RELEASE\spring-instrument-4.1.2.RELEASE.jar sk.upjs.ics.novotnyr.restlet.MainFrame</commandlineArgs>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
